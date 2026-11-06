@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: ['11', '17']
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: ${{ matrix.java }}
+      # Tests, the Android API 21 signature check (animalsnifferMain) and the javadoc/sources jars.
+      - run: ./gradlew build dokkaJavadocJar sourcesJar --no-daemon
+      - if: always()
+        run: cat build/fixture-results.txt

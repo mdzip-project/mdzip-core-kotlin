@@ -1,0 +1,9 @@
+* text=auto
+gradlew text eol=lf
+*.bat text eol=crlf
+*.jar binary
+*.mdz binary
+*.png binary
+*.bin binary
+# Spec fixtures are checked byte for byte against SPEC-FIXTURES.json.
+src/test/resources/fixtures/** -text
