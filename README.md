@@ -157,6 +157,8 @@ Requires JDK 11 or later; the Gradle wrapper (8.14.3) downloads everything else.
 
 On Windows with `JAVA_HOME` pointing elsewhere, set it for the build, for example `JAVA_HOME="C:/Program Files/Zulu/zulu-11" ./gradlew build`.
 
+To run the checks on an Android phone or emulator, see [`android-test/README.md`](android-test/README.md).
+
 The fixtures in `src/test/resources/fixtures` are copied from spec tag v1.2.1 with `node ../mdzip-spec/tools/sync-fixtures.mjs src/test/resources/fixtures --ref v1.2.1` and are not edited. A test checks every file against the SHA-256 in `SPEC-FIXTURES.json`.
 
 ### Fixture results
@@ -193,7 +195,7 @@ The build is set up for Maven Central as `org.mdzip:mdzip-core` with the [vannik
 ## What's left to do
 
 - Not released: no Maven Central namespace, signing key, tag or GitHub repository yet. The CI workflow has not run.
-- Not tested on an Android device or emulator. The API 21 signature check covers the class library, not runtime behavior (for example `Inflater` differences on old Android versions).
+- Not yet run on Android. [`android-test/`](android-test/README.md) runs the library's checks on a device or emulator; CI runs it on emulators for API 21, 24, 29 and 35 (`.github/workflows/android.yml`) once the repository is pushed, and the guide there explains running it on a phone.
 - Archives are read and written in memory; there is no streaming or random-access file API.
 - Optional extensions are not implemented: configurable limits, host link resolution (Sections 9.4 and 9.5), image analysis, workspace model, directory packing, MIME helpers and safe extraction to disk. `create-filter-cases.json` (a packing convenience) is not run.
 - Names without the UTF-8 flag that aren't valid UTF-8 are decoded as CP437; there is no other legacy encoding support.

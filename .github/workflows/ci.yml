@@ -20,4 +20,4 @@ jobs:
       # Tests, the Android API 21 signature check (animalsnifferMain) and the javadoc/sources jars.
       - run: ./gradlew build dokkaJavadocJar sourcesJar --no-daemon
       - if: always()
-        run: cat build/fixture-results.txt
+        run: cat build/fixture-results.txt || true
