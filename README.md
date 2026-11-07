@@ -2,7 +2,7 @@
 
 Read, write and validate **MDZip** (`.mdz`) archives from Kotlin and Java, on Android and the JVM. An `.mdz` file is a ZIP archive holding one or more Markdown documents, the files they use and a `manifest.json`.
 
-This library implements the [MDZip specification](https://github.com/mdzip-project/mdzip-spec) 1.2.1 and the required operations (R1 to R7) of the [core library contract](https://github.com/mdzip-project/.github/blob/main/docs/core-contract.md). It does not render Markdown; your app does that. Status: 0.1.0, not yet released.
+This library implements the [MDZip specification](https://github.com/mdzip-project/mdzip-spec) 1.2.1 and the required operations (R1 to R7) of the [core library contract](https://github.com/mdzip-project/.github/blob/main/docs/core-contract.md). It does not render Markdown; your app does that. Status: 0.1.0, not yet released. CI runs the tests on Java 11 and 17 and on Android emulators from API 21 to 35.
 
 - Plain Kotlin/JVM library compiled to **Java 8 bytecode**. Works in Android apps without Android-specific packaging.
 - Runs on **Android 5.0 (API 21) and later**: the build checks the compiled classes against the API 21 signature, so nothing from `java.nio.file`, `java.time`, `java.util.Base64` or other API 24+/26+ classes is used.
@@ -195,7 +195,7 @@ The build is set up for Maven Central as `org.mdzip:mdzip-core` with the [vannik
 ## What's left to do
 
 - Not released: no Maven Central namespace, signing key, tag or GitHub repository yet. The CI workflow has not run.
-- Not yet run on Android. [`android-test/`](android-test/README.md) runs the library's checks on a device or emulator; CI runs it on emulators for API 21, 24, 29 and 35 (`.github/workflows/android.yml`) once the repository is pushed, and the guide there explains running it on a phone.
+- Tested on Android emulators only (API 21, 24, 29 and 35 in CI, all 14 device tests pass), not yet on a physical phone; [`android-test/README.md`](android-test/README.md) explains how.
 - Archives are read and written in memory; there is no streaming or random-access file API.
 - Optional extensions are not implemented: configurable limits, host link resolution (Sections 9.4 and 9.5), image analysis, workspace model, directory packing, MIME helpers and safe extraction to disk. `create-filter-cases.json` (a packing convenience) is not run.
 - Names without the UTF-8 flag that aren't valid UTF-8 are decoded as CP437; there is no other legacy encoding support.
